@@ -1,45 +1,26 @@
 version: '3.8'
+
 services:
-  # 1. Database Service
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=studentdb
+
   db:
-    image: postgres:15-alpine # Or mysql:8 or mongo:latest
-    environment:
-      POSTGRES_DB: devsolutions_db
-      POSTGRES_USER: devuser
-      POSTGRES_PASSWORD: mysecretpassword
-    volumes:
-      - db_data:/var/lib/postgresql/data # Challenge: Add persistence
-    restart: always # Ensures recovery from failure (Challenge)
-
-  # 2. Backend Service
-  backend:
-    # Use the image you built in Phase 2, e.g., devsolutions/backend:latest
-    build:
-      context: ./backend_folder # Path to your backend's Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      # Crucial: The hostname is the service name in the Compose file (e.g., 'db')
-      DATABASE_HOST: db 
-      DATABASE_PORT: 5432
-      DATABASE_NAME: devsolutions_db
-    depends_on:
-      - db # Wait for the database to start
+    image: mysql:8.0
     restart: always
-    
-  # 3. Frontend Service
-  frontend:
-    # Use the image you built in Phase 2
-    build:
-      context: ./frontend_folder # Path to your frontend's Dockerfile
-    ports:
-      - "3000:3000" # Expose the web app to your host machine
     environment:
-      # Link to the backend service
-      BACKEND_API_URL: http://backend:8080
-    depends_on:
-      - backend
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: studentdb
+    volumes:
+      - db_data:/var/lib/mysql
 
-# Define named volumes for persistence (Challenge)
 volumes:
   db_data:
