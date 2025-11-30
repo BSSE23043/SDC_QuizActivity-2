@@ -53,5 +53,12 @@ spec:
                 sh 'kubectl expose deployment quiz-activity-deployment --type=NodePort --port=80 --target-port=80'
             }
         }
+
+        stage('Apply Port Forwarding') {
+            steps {
+                echo '🧪 Applying port forwarding...'
+                sh 'kubectl port-forward deployment/quiz-activity-deployment 8080:80'
+            }
+        }
     }
 }
