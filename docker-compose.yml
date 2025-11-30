@@ -4,19 +4,3 @@ services:
   web:
     build: .
     image: quiz_activity_image:v1
-    ports:
-      - "5000:5000"
-    depends_on:
-      - db
-
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: studentdb
-    volumes:
-      - db_data:/var/lib/mysql
-
-volumes:
-  db_data:
