@@ -6,7 +6,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'docker-compose up --build -d'
+                sh 'docker-compose down || true'   // stop/remove old containers
+                sh 'docker-compose build'          // build images
+                sh 'docker-compose up -d'          // start containers
             }
         }
 
