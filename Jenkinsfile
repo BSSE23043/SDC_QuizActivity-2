@@ -48,12 +48,5 @@ spec:
                 sh 'kubectl apply -f deployment.yaml'
             }
         }
-
-        stage('Apply NodePort Service') {
-            steps {
-                echo '🧪 Applying nodeport service...'
-                sh 'kubectl apply -f kubernetes/service.yaml'
-            }
-        }
     }
 }
