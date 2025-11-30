@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'docker build -t quiz_activity_image:v1 .'
+                sh 'docker-compose up --build'
             }
         }
 
