@@ -6,8 +6,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'docker pull mysql:8.0'
-                sh 'docker-compose down || true'
                 sh 'docker-compose up --build -d'
             }
         }
