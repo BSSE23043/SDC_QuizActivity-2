@@ -6,9 +6,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'docker compose down || true'
-                sh 'docker compose build'
-                sh 'docker compose up -d'
+                sh 'docker-compose down || true'
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
             }
         }
 
