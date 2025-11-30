@@ -15,7 +15,7 @@ def home():
                 database='studentdb'
             )
             cursor = conn.cursor()
-            cursor.execute("SELECT 'Hello from MySQL inside Docker Jenkins!'")
+            cursor.execute("SELECT 'Hello from MySQL inside Docker Jenkins after Git Commit!!'")
             result = cursor.fetchone()
             conn.close()
             return f"<h2>{result[0]}</h2>"
