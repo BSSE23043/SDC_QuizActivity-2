@@ -47,5 +47,11 @@ spec:
             }
         }
 
+        stage('Apply NodePort Service') {
+            steps {
+                echo '🧪 Applying nodeport service...'
+                sh 'kubectl expose deployment quiz-activity-deployment --type=NodePort --port=80 --target-port=80'
+            }
+        }
     }
 }
