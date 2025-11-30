@@ -40,7 +40,7 @@ spec:
         - name: quiz-activity
           image: quiz_activity_image:v1
           ports:
-            - containerPort: 80
+            - containerPort: 5000
 '''
 
                 sh 'kubectl apply -f deployment.yaml'
@@ -50,14 +50,7 @@ spec:
         stage('Apply NodePort Service') {
             steps {
                 echo '🧪 Applying nodeport service...'
-                sh 'kubectl expose deployment quiz-activity-deployment --type=NodePort --port=80 --target-port=80'
-            }
-        }
-
-        stage('Apply Port Forwarding') {
-            steps {
-                echo '🧪 Applying port forwarding...'
-                sh 'kubectl port-forward deployment/quiz-activity-deployment 8080:80'
+                sh 'kubectl apply -f kubernetes/service.yaml'
             }
         }
     }
